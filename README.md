@@ -6,7 +6,7 @@ A cool full feature slider for jQuery
 ***
 Supports:
 
-IE8+ / Chrome / Firefox / Safari / Netscape (Ok, the last one was a joke)
+IE7+ / Chrome / Firefox / Safari / Netscape (Ok, the last one was a joke)
 ***
 
 PARAMETERS
