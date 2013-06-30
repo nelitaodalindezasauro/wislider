@@ -1,7 +1,7 @@
 /*
  * wislider - v1.0
  * created by Alexandre Moraes
- * the wislider script is free, use it as you wish :)
+ * this script is free, use it as you wish :)
  * http://wikarus.com.br
  * http://facebook.com/wikarus
  * alexandre@wikarus.com.br
