@@ -1,5 +1,5 @@
 /*
- * wislider - v1.0.2
+ * wislider - v1.0.3
  * created by Alexandre Moraes
  * this script is free, use it as you wish :)
  * http://wikarus.com.br
@@ -27,7 +27,8 @@
                 auto: true,
                 waitTime: 8000,
                 animate: true,
-                pauseOnHover: true
+                pauseOnHover: true,
+                speedAdjustToLength: true
             }, params);
             
             var wislider = {
@@ -37,7 +38,8 @@
                     'stepLength': '',
                     'actualObject': '',
                     'nextObject': '',
-                    'previousObject': ''
+                    'previousObject': '',
+                    'adjustedSpeed': ''
                 },
                 'wrapType' : function(string)
                 {
@@ -107,6 +109,13 @@
                     wislider.temp.object = object;
                     wislider.temp.step = $(object).parent().width();
                     wislider.temp.stepLength = $('> div', wislider.temp.object).length;
+                    if(params.speedAdjustToLength)
+                    {
+                        console.log('rá');
+                        wislider.temp.adjustedSpeed = (wislider.temp.stepLength * 1000) / 5;
+                    } else {
+                        wislider.temp.adjustedSpeed = params.slideSpeed;
+                    }
                 },
                 'setFakeBounds' : function()
                 {
@@ -167,7 +176,7 @@
                 {
                     $(wislider.temp.object).stop().animate({
                         marginLeft: '-' + wislider.nToObject(n) + 'px'
-                    }, {duration: params.slideSpeed, ease: params.slideEase, complete: function(){
+                    }, {duration: wislider.temp.adjustedSpeed, ease: params.slideEase, complete: function(){
                         wislider.shineNav(n);
                         wislider.reorderArrows(n);
                         wislider.fakeBounds();
