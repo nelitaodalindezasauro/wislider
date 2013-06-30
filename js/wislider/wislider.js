@@ -28,7 +28,7 @@
                 waitTime: 8000,
                 animate: true,
                 pauseOnHover: true,
-                speedAdjustToLength: true
+                speedAdjustToLength: false
             }, params);
             
             var wislider = {
@@ -111,7 +111,7 @@
                     wislider.temp.stepLength = $('> div', wislider.temp.object).length;
                     if(params.speedAdjustToLength)
                     {
-                        console.log('rá');
+                        console.log('rï¿½');
                         wislider.temp.adjustedSpeed = (wislider.temp.stepLength * 1000) / 5;
                     } else {
                         wislider.temp.adjustedSpeed = params.slideSpeed;
