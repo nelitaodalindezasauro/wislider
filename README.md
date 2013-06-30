@@ -9,7 +9,8 @@ Supports:
 IE8+ / Chrome / Firefox / Safari / Netscape (Ok, the last one was a joke)
 ***
 
-> PARAMETERS
+PARAMETERS
+========
 
 > *arrowParent*
 * **Description:** Set where the navigation arrows should go.
@@ -94,7 +95,8 @@ IE8+ / Chrome / Firefox / Safari / Netscape (Ok, the last one was a joke)
 
 ***
 
-> CHANGELOG
+CHANGELOG
+========
 
 *Changes 1.0.3*
 

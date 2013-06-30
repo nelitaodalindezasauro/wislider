@@ -1,5 +1,5 @@
 /*
- * wislider - v1.0.3
+ * wislider - v1.0.4
  * created by Alexandre Moraes
  * this script is free, use it as you wish :)
  * http://wikarus.com.br
