@@ -1,5 +1,5 @@
 /*
- * wislider - v1.0
+ * wislider - v1.0.1
  * created by Alexandre Moraes
  * this script is free, use it as you wish :)
  * http://wikarus.com.br
@@ -111,7 +111,7 @@
                 'setFakeBounds' : function()
                 {
                     var firstObject = $('> div', wislider.temp.object).eq(0);
-                    var lastObject = $('> div', wislider.temp.object).eq(1);
+                    var lastObject = $('> div', wislider.temp.object).eq((wislider.temp.stepLength - 1));
                     
                     $(firstObject).clone().appendTo($(wislider.temp.object));
                     $(lastObject).clone().prependTo($(wislider.temp.object));
