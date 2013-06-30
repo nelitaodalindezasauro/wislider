@@ -1,5 +1,5 @@
 /*
- * wislider - v1.0.1
+ * wislider - v1.0.2
  * created by Alexandre Moraes
  * this script is free, use it as you wish :)
  * http://wikarus.com.br
@@ -20,7 +20,7 @@
                 navParent: '.wisliderNav',
                 navSelector: '.wisliderSelector',
                 navButtons: true,
-                navArrows: false,
+                navArrows: true,
                 startAt: 1,
                 slideSpeed: 500,
                 slideEase: 'easein',
