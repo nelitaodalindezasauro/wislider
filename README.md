@@ -6,11 +6,26 @@ A cool full feature slider for jQuery
 ***
 Supports:
 
-IE8+ / Chrome / Firefox / Safari / Netscape (Ok, the last one was a joke)
+IE7+ / Chrome / Firefox / Safari / Netscape (Ok, the last one was a joke)
 ***
 
 PARAMETERS
 ========
+
+> *disabledArrowClass*
+* **Description:** If ```infinite``` are set to ```false``` your arrow navigation object should assume a specific class when reach the slide limit.
+* **Default:** ```.disabled```
+* **Eg.:** ```disabledArrowClass: '.disabledArrow'```
+
+> *infinite*
+* **Description:** Should the slider go always forward like a carousel?
+* **Default:** ```true```
+* **Eg.:** ```infinite: false```
+
+> *type*
+* **Description:** The slider will be ```vertical``` or ```horizontal```. See repository for examples.
+* **Default:** ```horizontal```
+* **Eg.:** ```type: 'vertical'```
 
 > *arrowParent*
 * **Description:** Set where the navigation arrows should go.
@@ -97,6 +112,15 @@ PARAMETERS
 
 CHANGELOG
 ========
+*Changes 1.0.5*
+
+> ADJUSTMENTS
+* Added three new parameters: ```disabledArrowClass```, ```infinite``` and ```type```
+
+*Changes 1.0.4*
+
+> ADJUSTMENTS
+* The ```speedAdjustToLength``` option are now set ```false``` as default
 
 *Changes 1.0.3*
 
@@ -112,4 +136,3 @@ CHANGELOG
 
 > FIXES
 * Bug fix that crashes the slider with more than 2 slides
-
