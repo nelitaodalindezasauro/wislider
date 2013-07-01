@@ -117,10 +117,6 @@ CHANGELOG
 > ADJUSTMENTS
 * Added three new parameters: ```disabledArrowClass```, ```infinite``` and ```type```
 
-*Changes 1.0.4*
-
-> ADJUSTMENTS
-* The ```speedAdjustToLength``` option are now set ```false``` as default
 
 *Changes 1.0.4*
 
