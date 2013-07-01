@@ -1,5 +1,5 @@
 /*
-    wislider - v1.0 - CSS File
+    wislider - v1.0.1 - CSS File
     created by Alexandre Moraes
     the wislider script is free, use it as you wish :)
     http://wikarus.com.br
@@ -14,5 +14,6 @@
 .wisliderPrev { left: 10px; background: url('../images/wislider/wislider.png') 0px 0px no-repeat; }
 .wisliderNext { right: 10px; background: url('../images/wislider/wislider.png')  0px -50px no-repeat; }
 .wisliderArrow { position: absolute; transition: all 0.2s linear; z-index: 3; top: 50%; margin-top: -25px; width: 50px; height: 50px; display: block; cursor: pointer; opacity: .2; }
-.wisliderArrow:hover { opacity: 1; }
+.wisliderArrow.disabled { cursor: default; opacity: .1; }
+.wisliderArrow:not(.disabled):hover { opacity: 1; }
 

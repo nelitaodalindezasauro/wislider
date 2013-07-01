@@ -1,5 +1,5 @@
 /*
- * wislider - v1.0.4
+ * wislider - v1.0.5
  * created by Alexandre Moraes
  * this script is free, use it as you wish :)
  * http://wikarus.com.br
@@ -11,8 +11,11 @@
 (function( $ ){
 
 	$.fn.wislider = function(params) {
-		
-            params = $.extend( {
+            
+            params = $.extend({
+                disabledArrowClass: '.disabled',
+                infinite: true,
+                type: 'horizontal',
                 arrowParent: '.wisliderArrows',
                 arrowPrev: '.wisliderPrev',
                 arrowNext: '.wisliderNext',
@@ -89,25 +92,46 @@
                         $(params.arrowParent).append(object);
                     }
                 },
+                'previousSlide' : function()
+                {
+                    if(params.animate)
+                    {
+                        wislider.animateToObject(wislider.temp.previousObject);
+                    } else {
+                        wislider.goToObject(wislider.temp.previousObject)
+                    }
+                },
+                'nextSlide' : function()
+                {
+                    if(params.animate)
+                    {
+                        wislider.animateToObject(wislider.temp.nextObject);
+                    } else {
+                        wislider.goToObject(wislider.temp.nextObject)
+                    }
+                },
                 'arrowsController' : function()
                 {
-                    if(params.navArrows)
-                    {
-                        $(params.arrowSelector).click(function(){
-                            var n = $(this).attr('name');
-                            if(params.animate)
-                            {
-                                wislider.animateToObject(n);
-                            } else {
-                                wislider.goToObject(n)
-                            }
-                        });
-                    }
+                    $(params.arrowPrev).click(function(){                  
+                        wislider.previousSlide();
+                    });
+
+                    $(params.arrowNext).click(function(){
+                        wislider.nextSlide();
+                    });
                 },
                 'setConfig' : function(object)
                 {
                     wislider.temp.object = object;
-                    wislider.temp.step = $(object).parent().width();
+                    
+                    if(params.type == "horizontal")
+                    {
+                        wislider.temp.step = $(object).parent().width();
+                    } else if(params.type == "vertical")
+                    {
+                        wislider.temp.step = $(object).parent().height();
+                    }
+                    
                     wislider.temp.stepLength = $('> div', wislider.temp.object).length;
                     if(params.speedAdjustToLength)
                     {
@@ -147,19 +171,23 @@
                     wislider.temp.actualObject = n;
                     wislider.temp.previousObject = (parseInt(n)-1);
                     wislider.temp.nextObject = (parseInt(n)+1);
-                    
-                    if(params.navArrows)
-                    {
-                        $(params.arrowPrev).attr('name',wislider.temp.previousObject);
-                        $(params.arrowNext).attr('name',wislider.temp.nextObject);
-                    }
                 },
                 'goToObject' : function(n)
                 {
-                    $(wislider.temp.object).css({marginLeft: '-' + wislider.nToObject(n) + 'px'});
-                    wislider.shineNav(n);
-                    wislider.reorderArrows(n);
-                    wislider.fakeBounds();
+                    if(wislider.checkInfinite(n))
+                    {
+                        if(params.type == "vertical")
+                        {
+                            $(wislider.temp.object).css({marginTop: '-' + wislider.nToObject(n) + 'px'});
+                        } else if(params.type == "horizontal")
+                        {
+                            $(wislider.temp.object).css({marginLeft: '-' + wislider.nToObject(n) + 'px'});
+                        }
+                        wislider.shineNav(n);
+                        wislider.reorderArrows(n);
+                        wislider.fakeBounds();
+                        wislider.updateArrows();
+                    }
                 },
                 'fakeBounds' : function()
                 {
@@ -172,45 +200,103 @@
                         wislider.goToObject(wislider.temp.stepLength);
                     }
                 },
+                'checkInfinite' : function(n)
+                {
+                    if(!params.infinite)
+                    {
+                        if(wislider.nToObject(n) <= 0)
+                        {
+                            return false;
+                        }
+                        if(wislider.nToObject(n) > wislider.nToObject(wislider.temp.stepLength))
+                        {
+                            return false;
+                        }                        
+                        return true;
+                    } else {
+                        return true;
+                    }
+                },
+                'updateArrows' : function()
+                {
+                    if(!params.infinite)
+                    {
+                        console.log(wislider.temp.nextObject);
+                        console.log(wislider.temp.previousObject);
+                        if(wislider.temp.nextObject > wislider.temp.stepLength)
+                        {
+                            $(params.arrowNext).addClass(wislider.wrapType(params.disabledArrowClass)[1]);
+                        } else {
+                            $(params.arrowNext).removeClass(wislider.wrapType(params.disabledArrowClass)[1]);
+                        }
+                        if(wislider.temp.previousObject == 0)
+                        {
+                            $(params.arrowPrev).addClass(wislider.wrapType(params.disabledArrowClass)[1]);
+                        } else
+                        {
+                            $(params.arrowPrev).removeClass(wislider.wrapType(params.disabledArrowClass)[1]);
+                        }
+                    }
+                },
                 'animateToObject' : function(n)
                 {
-                    $(wislider.temp.object).stop().animate({
-                        marginLeft: '-' + wislider.nToObject(n) + 'px'
-                    }, {duration: wislider.temp.adjustedSpeed, ease: params.slideEase, complete: function(){
-                        wislider.shineNav(n);
-                        wislider.reorderArrows(n);
-                        wislider.fakeBounds();
-                    }});
+                    if(wislider.checkInfinite(n))
+                    {
+                        if(params.type == "vertical")
+                        {
+                            $(wislider.temp.object).stop().animate({
+                                marginTop: '-' + wislider.nToObject(n) + 'px'
+                            }, {duration: wislider.temp.adjustedSpeed, ease: params.slideEase, complete: function(){
+                                wislider.shineNav(n);
+                                wislider.reorderArrows(n);
+                                wislider.fakeBounds();
+                                wislider.updateArrows();
+                            }});
+                        } else if(params.type == "horizontal")
+                        {
+                            $(wislider.temp.object).stop().animate({
+                                marginLeft: '-' + wislider.nToObject(n) + 'px'
+                            }, {duration: wislider.temp.adjustedSpeed, ease: params.slideEase, complete: function(){
+                                wislider.shineNav(n);
+                                wislider.reorderArrows(n);
+                                wislider.fakeBounds();
+                                wislider.updateArrows();
+                            }});
+                        }
+                    }
                 },
                 'autoSlideController' : function()
                 {
-                    if(params.pauseOnHover)
+                    if(params.infinite)
                     {
-                        $(wislider.temp.object).parent().on({
-                            mouseenter: function() {
-                                clearInterval( $(this).data('timer') );
-                            },
-                            mouseleave: function() {
-                                $(this).data('timer', setInterval(function () {
-                                    if(params.animate)
-                                    {
-                                        wislider.animateToObject(wislider.temp.nextObject);
-                                    } else {
-                                        wislider.goToObject(wislider.temp.nextObject);
-                                    }
-                                }, params.waitTime));
-                            }
-                        }).trigger('mouseleave');
-                    } else
-                    {
-                        $(this).data('timer', setInterval(function () {
-                            if(params.animate)
-                            {
-                                wislider.animateToObject(wislider.temp.nextObject);
-                            } else {
-                                wislider.goToObject(wislider.temp.nextObject);
-                            }
-                        }, params.waitTime));                        
+                        if(params.pauseOnHover)
+                        {
+                            $(wislider.temp.object).parent().on({
+                                mouseenter: function() {
+                                    clearInterval( $(this).data('timer') );
+                                },
+                                mouseleave: function() {
+                                    $(this).data('timer', setInterval(function () {
+                                        if(params.animate)
+                                        {
+                                            wislider.animateToObject(wislider.temp.nextObject);
+                                        } else {
+                                            wislider.goToObject(wislider.temp.nextObject);
+                                        }
+                                    }, params.waitTime));
+                                }
+                            }).trigger('mouseleave');
+                        } else
+                        {
+                            $(this).data('timer', setInterval(function () {
+                                if(params.animate)
+                                {
+                                    wislider.animateToObject(wislider.temp.nextObject);
+                                } else {
+                                    wislider.goToObject(wislider.temp.nextObject);
+                                }
+                            }, params.waitTime));                        
+                        }
                     }
                 }
             };

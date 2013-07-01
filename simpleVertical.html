@@ -16,20 +16,29 @@
         <script src="js/jquery/jquery.min.js"></script>
         <script src="js/wislider/wislider.js"></script>
         <script>
-            $(document).ready(function() {
+            $(document).ready(function() {               
                 $('.scrollable').wislider({
-                    waitTime: 2000
+                    waitTime: 1000,
+                    type: 'vertical',
+                    navArrows: false,
+                    auto: false,
+                    arrowPrev: '.prev',
+                    arrowNext: '.next',
                 });
             });
         </script>
         <style>
             body { margin: 0; }
             .container { overflow: hidden; margin: 50px auto; width: 1000px; height: 230px; width: 500px; border: solid 1px #ccc; position: relative; }
-            .container .scrollable { width: 20000em; height: 233px; color: #FFFFFF; }
-            .container .slide { overflow: hidden; width: 500px; float: left; height: 230px; background-size: contain; }
+            .container .scrollable { height: 20000em; width: 233px; color: #FFFFFF; }
+            .container .slide { overflow: hidden; width: 500px; height: 230px; background-size: contain; }
             .container .obj1 {  background: url('images/simple1.jpg') center no-repeat; }
             .container .obj2 {  background: url('images/simple2.jpg') center no-repeat; }
             .wisliderNav { position: absolute; bottom: 5px; text-align: center; width: 500px; }
+            .arrowsParent { margin: 0 auto; text-align: center;}
+            .arrowsParent span { background:#222; border-radius:20px; width: 20px; color:#fff; cursor: pointer; display: inline-block; padding: 10px; }
+            .arrowsParent span.disabled { cursor:default; }
+            .arrowsParent span:not(.disabled):hover { background:#888; }
         </style>
     </head>
     <body>
@@ -39,7 +48,10 @@
                 <div class="obj1 slide"></div>
                 <div class="obj2 slide"></div>
             </div>
-            <div class="wisliderNav"></div>
+        </div>
+        <div class="arrowsParent">
+            <span class="prev">/\</span>
+            <span class="next">\/</span>
         </div>
     </body>
 </html>
