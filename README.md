@@ -122,15 +122,20 @@ CHANGELOG
 > ADJUSTMENTS
 * The ```speedAdjustToLength``` option are now set ```false``` as default
 
+*Changes 1.0.4*
+
+> ADJUSTMENTS
+* The ```speedAdjustToLength``` option are now set ```false``` as default
+
 *Changes 1.0.3*
 
 > ADJUSTMENTS
-* Added option to adjust the speed of slide based on how many slides are set
+* Added option to adjust the speed of slide based on how many slides are set: ```speedAdjustToLength```
 
 *Changes 1.0.2*
 
 > ADJUSTMENTS
-* The navigation arrows option are now set true as default
+* The ```navArrows``` option are now set ```true``` as default
 
 *Changes 1.0.1*
 
