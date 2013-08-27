@@ -2,9 +2,9 @@
  * wislider - v1.0.5
  * created by Alexandre Moraes
  * this script is free, use it as you wish :)
- * http://wikarus.com.br
- * http://facebook.com/wikarus
- * alexandre@wikarus.com.br
+ * http://doisbit.com
+ * http://facebook.com/kalvinmoraes
+ * kalvinmoraes@gmail.com
  * fork this project at github: https://github.com/wikarus/wislider/fork
  */
 
