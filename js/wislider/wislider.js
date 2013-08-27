@@ -135,7 +135,6 @@
                     wislider.temp.stepLength = $('> div', wislider.temp.object).length;
                     if(params.speedAdjustToLength)
                     {
-                        console.log('r�');
                         wislider.temp.adjustedSpeed = (wislider.temp.stepLength * 1000) / 5;
                     } else {
                         wislider.temp.adjustedSpeed = params.slideSpeed;
@@ -221,8 +220,6 @@
                 {
                     if(!params.infinite)
                     {
-                        console.log(wislider.temp.nextObject);
-                        console.log(wislider.temp.previousObject);
                         if(wislider.temp.nextObject > wislider.temp.stepLength)
                         {
                             $(params.arrowNext).addClass(wislider.wrapType(params.disabledArrowClass)[1]);
